@@ -21,3 +21,10 @@ export type UpdateProductParams = {
 export type CreateCategoryParams = {
   categoryName: string;
 };
+
+export type CreateUserParams = {
+  email: string;
+  userName: string;
+  role: string;
+  password: string;
+};
