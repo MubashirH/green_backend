@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
+  public userRole;
   constructor(
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
@@ -26,7 +27,9 @@ export class UsersService {
   }
 
   async getUser(query: object): Promise<Users> {
-    return this.usersRepository.findOne({ where: query });
+    const user = this.usersRepository.findOne({ where: query });
+    this.userRole = { role: (await user).role };
+    return user;
   }
 
   deleteUser(id: number) {

@@ -7,7 +7,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateProductDto } from 'src/products/dtos/createProduct.dto';
 import { UpdateProductDto } from 'src/products/dtos/udpateProduct.dto';
 import { ProductsService } from 'src/products/services/products/products.service';
@@ -16,6 +18,7 @@ import { ProductsService } from 'src/products/services/products/products.service
 export class ProductsController {
   constructor(private productService: ProductsService) {}
   @Get()
+  @UseGuards(JwtAuthGuard)
   async getProducts() {
     return this.productService.getProducts();
   }
